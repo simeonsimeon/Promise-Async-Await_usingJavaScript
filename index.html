@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Third() {
+            return new Promise((ComeIn, GetOut) => {
+                setTimeout(() => {
+                    GetOut("GO-out");
+                    //  console.log("err");
+                }, 1000)
+            })
+        }
+        function Second() {
+            return new Promise((Accept, GoOut) => {
+                setTimeout(() => {
+                    Accept("sucess");
+                    // console.log("Sakthi");
+                    // var total=a+b;
+                }, 1000)
+
+            })
+            Third();
+        }
+        function First() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("sucess")
+                    // console.log("SImeon");
+                    var name = "simeon";
+                }, 1000)
+
+            })
+
+
+        }
+        First().then((what) => {
+            console.log("First " + what)
+            Second().then((what) => {
+                console.log("Second " + what)
+                Third().then((what) => {
+                    console.log("Third " + what);
+                }).catch(() => {
+                    console.log("Third error");
+                })
+            }).catch(() => {
+                console.log("Second error");
+            })
+
+        }).catch(() => {
+            console.log("First error");
+        })
+
+
+    </script>
+</body>
+</html>
